@@ -13,7 +13,9 @@
     "db:migrate": "bun run scripts/migrate.ts",
     "db:seed": "bun run scripts/seed.ts",
     "db:setup": "bun run scripts/migrate.ts && bun run scripts/seed.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "admin:code": "bun run scripts/admin-code.ts",
+    "reset:code": "bun run scripts/reset-code.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
+    "@types/bun": "^1.4.3",
     "@types/node": "^25.3.0",
     "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3",

@@ -3,9 +3,13 @@ import type { ReactNode } from "react";
 import appCss from "~/styles/app.css?url";
 import { Footer, Header } from "~/components/ui";
 import { getStoreSettings } from "~/server/catalog";
+import { getSessionState } from "~/server/auth";
 
 export const Route = createRootRoute({
-  loader: async () => ({ settings: await getStoreSettings() }),
+  loader: async () => {
+    const [settings, session] = await Promise.all([getStoreSettings(), getSessionState()]);
+    return { settings, session };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -42,10 +46,10 @@ function NotFound() {
 }
 
 function RootComponent() {
-  const { settings } = Route.useLoaderData();
+  const { settings, session } = Route.useLoaderData();
   return (
     <RootDocument>
-      <Header />
+      <Header user={session.user} />
       <Outlet />
       <Footer settings={settings} />
     </RootDocument>

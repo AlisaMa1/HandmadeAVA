@@ -1,5 +1,7 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useSyncExternalStore, useState, type ReactNode } from "react";
+import { logoutCustomer, type SessionUser } from "~/server/auth";
 import { cartSnapshot, parseCart, subscribeCart, cartCount } from "~/lib/cart";
 import { formatEuro, toNumber } from "~/lib/format";
 import type { ProductCard as ProductCardType, StoreSettings } from "~/server/catalog";
@@ -17,7 +19,7 @@ function useCartCount(): number {
   return cartCount(parseCart(snapshot));
 }
 
-export function Header() {
+export function Header({ user = null }: { user?: SessionUser | null }) {
   const [open, setOpen] = useState(false);
   const count = useCartCount();
   return (
@@ -28,7 +30,7 @@ export function Header() {
           <span className="hidden text-[0.6rem] uppercase tracking-[0.3em] text-gold-deep sm:inline">handmade</span>
         </Link>
 
-        <nav aria-label="Navigimi kryesor" className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Navigimi kryesor" className="hidden items-center gap-7 md:flex">
           {NAV.map((item) => (
             <Link
               key={item.to}
@@ -42,7 +44,40 @@ export function Header() {
               ) : null}
             </Link>
           ))}
+          {user ? (
+            <Link
+              to="/llogaria"
+              className="text-sm tracking-wide text-ink-soft transition-colors hover:text-gold-deep"
+              activeProps={{ className: "text-gold-deep font-medium" }}
+            >
+              Llogaria
+            </Link>
+          ) : null}
         </nav>
+
+        <div className="hidden items-center gap-3 md:flex">
+          {user ? (
+            <>
+              <Link
+                to="/llogaria"
+                className="max-w-[12rem] truncate text-sm text-ink hover:text-gold-deep"
+                title={user.email}
+              >
+                Përshëndetje, {user.fullName?.split(" ")[0] || user.email}
+              </Link>
+              <LogoutControl />
+            </>
+          ) : (
+            <>
+              <Link to="/hyrje" className="btn-outline px-5 py-2">
+                Hyr
+              </Link>
+              <Link to="/regjistrohu" className="btn-gold px-5 py-2">
+                Regjistrohu
+              </Link>
+            </>
+          )}
+        </div>
 
         <button
           type="button"
@@ -72,10 +107,74 @@ export function Header() {
                 </Link>
               </li>
             ))}
+            {user ? (
+              <>
+                <li>
+                  <Link
+                    to="/llogaria"
+                    onClick={() => setOpen(false)}
+                    className="block py-3 text-sm tracking-wide text-ink-soft"
+                  >
+                    Llogaria ({user.fullName?.split(" ")[0] || user.email})
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/llogaria/porosite"
+                    onClick={() => setOpen(false)}
+                    className="block py-3 text-sm tracking-wide text-ink-soft"
+                  >
+                    Porositë e mia
+                  </Link>
+                </li>
+                <li className="pt-2">
+                  <LogoutControl className="btn-outline w-full" />
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="pt-1">
+                  <Link to="/hyrje" onClick={() => setOpen(false)} className="block py-3 text-sm tracking-wide text-ink-soft">
+                    Hyr
+                  </Link>
+                </li>
+                <li className="pb-2">
+                  <Link to="/regjistrohu" onClick={() => setOpen(false)} className="btn-gold w-full">
+                    Regjistrohu
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       ) : null}
     </header>
+  );
+}
+
+/** Sign-out control: destroys the session server-side, then refreshes the page state. */
+export function LogoutControl({ className = "btn-outline px-5 py-2" }: { className?: string }) {
+  const router = useRouter();
+  const logout = useServerFn(logoutCustomer);
+  const [busy, setBusy] = useState(false);
+  return (
+    <button
+      type="button"
+      className={className}
+      disabled={busy}
+      onClick={async () => {
+        setBusy(true);
+        try {
+          await logout();
+          await router.invalidate();
+          await router.navigate({ to: "/" });
+        } finally {
+          setBusy(false);
+        }
+      }}
+    >
+      {busy ? "Po dilni…" : "Shkëputu"}
+    </button>
   );
 }
 
