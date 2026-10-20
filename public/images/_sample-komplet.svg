@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Komplet perla">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#FBF7F2"/><stop offset="70%" stop-color="#F5EEE5"/><stop offset="100%" stop-color="#EFE6DA"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E4CB7A"/><stop offset="50%" stop-color="#C9A227"/><stop offset="100%" stop-color="#A8862A"/>
+    </linearGradient>
+    <radialGradient id="pearl" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFFFFF"/><stop offset="60%" stop-color="#F7EFE6"/><stop offset="100%" stop-color="#E3D3C6"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#g)"/>
+  <circle cx="400" cy="380" r="250" fill="#F3D9DC" opacity="0.35"/>
+  <circle cx="400" cy="380" r="250" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.5"/>
+  <circle cx="235.29365573227184" cy="612.036161201268" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="205.70558063448468" cy="587.9451764788155" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="191.25092753840406" cy="560.8986752239871" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="193.05555670242336" cy="533.0032857099759" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="210.97890714293393" cy="506.4317553723288" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="243.62494480611952" cy="483.2537174158692" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="288.45089843661447" cy="465.2744888986584" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="341.9653138015361" cy="453.8944561689229" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="400.0" cy="450.0" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="458.0346861984639" cy="453.8944561689229" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="511.54910156338553" cy="465.2744888986584" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="556.3750551938805" cy="483.2537174158692" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="589.021092857066" cy="506.4317553723288" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="606.9444432975766" cy="533.0032857099759" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="608.7490724615959" cy="560.8986752239871" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="594.2944193655153" cy="587.9451764788155" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="564.7063442677281" cy="612.036161201268" r="18" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <rect x="255" y="470" width="290" height="150" rx="12" fill="#FAF3EA" stroke="url(#gold)" stroke-width="1.5"/>
+  <path d="M255 470 l145 70 l145 -70" fill="none" stroke="url(#gold)" stroke-width="1.2" opacity="0.7"/>  <circle cx="330" cy="600" r="14" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="358" cy="600" r="14" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="386" cy="600" r="14" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="414" cy="600" r="14" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="442" cy="600" r="14" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="470" cy="600" r="14" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <text x="400" y="726" text-anchor="middle" font-family="Georgia, serif" font-size="30" fill="#A8862A" letter-spacing="3">Komplet perla</text>
+  <text x="400" y="762" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#8A7F73" letter-spacing="4">MOSTËR · HANDMADEAVA</text>
+</svg>
