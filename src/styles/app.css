@@ -1,8 +1,62 @@
 @import "tailwindcss";
 
+@theme {
+  --color-cream: #FBF7F2;
+  --color-cream-deep: #F5EEE5;
+  --color-beige: #EFE6DA;
+  --color-blush: #F3D9DC;
+  --color-blush-deep: #E8B4B8;
+  --color-gold: #C9A227;
+  --color-gold-deep: #A8862A;
+  --color-ink: #2E2A26;
+  --color-ink-soft: #6B6157;
+  --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --radius-card: 1.25rem;
+}
+
 @layer base {
-  html,
-  body {
-    @apply bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-100;
+  html {
+    scroll-behavior: smooth;
   }
+  body {
+    @apply bg-cream text-ink antialiased;
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold-deep);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  ::selection {
+    background: var(--color-blush);
+  }
+}
+
+@utility container-shop {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+@utility btn-gold {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold-deep px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-ink disabled:cursor-not-allowed disabled:bg-ink-soft/40;
+}
+
+@utility btn-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-gold/60 px-6 py-3 text-sm font-medium tracking-wide text-gold-deep transition-colors duration-200 hover:border-gold-deep hover:bg-beige/60;
+}
+
+@utility card-soft {
+  @apply rounded-[var(--radius-card)] border border-gold/20 bg-white shadow-[0_1px_2px_rgba(46,42,38,0.04),0_10px_30px_-24px_rgba(46,42,38,0.35)];
+}
+
+@utility input-soft {
+  @apply w-full rounded-full border border-gold/30 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/60 focus:border-gold-deep focus:outline-none focus-visible:outline-2 focus-visible:outline-gold-deep;
+}
+
+@utility eyebrow {
+  @apply text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gold-deep;
 }

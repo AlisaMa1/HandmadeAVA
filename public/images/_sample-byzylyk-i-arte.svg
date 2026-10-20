@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Byzylyk i artë">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#FBF7F2"/><stop offset="70%" stop-color="#F5EEE5"/><stop offset="100%" stop-color="#EFE6DA"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E4CB7A"/><stop offset="50%" stop-color="#C9A227"/><stop offset="100%" stop-color="#A8862A"/>
+    </linearGradient>
+    <radialGradient id="pearl" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFFFFF"/><stop offset="60%" stop-color="#F7EFE6"/><stop offset="100%" stop-color="#E3D3C6"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#g)"/>
+  <circle cx="400" cy="380" r="250" fill="#F3D9DC" opacity="0.35"/>
+  <circle cx="400" cy="380" r="250" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.5"/>
+  <circle cx="570.0" cy="400.0" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="549.1890355213634" cy="439.5526069348468" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="491.85139199758373" cy="469.4213562466515" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="412.0253242835095" cy="482.2933363948345" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="329.2550377869858" cy="475.0170377131187" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="263.8055853570213" cy="449.3739518885764" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="231.7012755779243" cy="411.64240066493903" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="240.80236316056462" cy="371.06038371560635" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="288.880584453186" cy="337.5637941370959" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="364.16471409676745" cy="319.3537652926295" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="448.22257152874846" cy="320.88874734029105" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="520.4738616295142" cy="341.79292314044267" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <circle cx="563.2289487305623" cy="376.9482213985886" r="17" fill="url(#pearl)" stroke="#D9C7B8" stroke-width="0.8"/>
+  <text x="400" y="726" text-anchor="middle" font-family="Georgia, serif" font-size="30" fill="#A8862A" letter-spacing="3">Byzylyk i artë</text>
+  <text x="400" y="762" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#8A7F73" letter-spacing="4">MOSTËR · HANDMADEAVA</text>
+</svg>

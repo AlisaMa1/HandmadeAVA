@@ -1,5 +1,5 @@
 {
-  "name": "team-site-template",
+  "name": "handmadeava-site",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -9,7 +9,11 @@
     "start": "bun run serve.ts",
     "publish": "bash ./publish.sh",
     "go-live": "bash ./go-live.sh",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "db:migrate": "bun run scripts/migrate.ts",
+    "db:seed": "bun run scripts/seed.ts",
+    "db:setup": "bun run scripts/migrate.ts && bun run scripts/seed.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
