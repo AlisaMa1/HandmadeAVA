@@ -14,7 +14,8 @@
     ],
     "types": [
       "bun",
-      "node"
+      "node",
+      "vite/client"
     ],
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
