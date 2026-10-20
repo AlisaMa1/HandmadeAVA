@@ -79,7 +79,7 @@ export type HomeData = {
 
 export type ShopQuery = {
   q?: string;
-  category?: string;
+  category?: string | null;
   minPrice?: number | null;
   maxPrice?: number | null;
   inStock?: boolean;
