@@ -5,8 +5,8 @@ import { listMyOrders } from "~/server/accounts";
 /**
  * /llogaria/porosite — the signed-in customer's OWN orders. The query is filtered by
  * `profile_id = <session user id>`, so it can only ever return that customer's rows.
- * Checkout ships in step 3, so today this is genuinely empty: we show an honest empty
- * state rather than inventing sample orders.
+ * Orders are created by checkout (/arka). Each row links to that order's own
+ * confirmation page through its unguessable view token.
  */
 export const Route = createFileRoute("/llogaria/porosite")({
   loader: async () => {
@@ -52,7 +52,7 @@ function MyOrdersPage() {
 
           {orders.length > 0 ? (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
+              <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
                 <caption className="sr-only">Lista e porosive tuaja</caption>
                 <thead>
                   <tr className="border-b border-gold/25 text-xs uppercase tracking-[0.15em] text-ink-soft">
@@ -68,15 +68,30 @@ function MyOrdersPage() {
                     <th scope="col" className="py-3 pr-4 font-medium">
                       Totali
                     </th>
-                    <th scope="col" className="py-3 font-medium">
+                    <th scope="col" className="py-3 pr-4 font-medium">
                       Statusi
+                    </th>
+                    <th scope="col" className="py-3 font-medium">
+                      Detajet
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {orders.map((order) => (
                     <tr key={order.id} className="border-b border-gold/15 text-ink-soft">
-                      <td className="py-3 pr-4 font-medium text-ink">{order.orderNumber}</td>
+                      <td className="py-3 pr-4 font-medium text-ink">
+                        {order.viewToken ? (
+                          <Link
+                            to="/porosia/$token"
+                            params={{ token: order.viewToken }}
+                            className="underline underline-offset-4 hover:text-gold-deep"
+                          >
+                            {order.orderNumber}
+                          </Link>
+                        ) : (
+                          order.orderNumber
+                        )}
+                      </td>
                       <td className="py-3 pr-4">{formatDate(order.createdAt)}</td>
                       <td className="py-3 pr-4">{order.itemCount}</td>
                       <td className="py-3 pr-4">{order.total} €</td>
@@ -84,6 +99,19 @@ function MyOrdersPage() {
                         <span className="rounded-full bg-beige px-3 py-1 text-xs text-gold-deep">
                           {order.statusLabel}
                         </span>
+                      </td>
+                      <td className="py-3">
+                        {order.viewToken ? (
+                          <Link
+                            to="/porosia/$token"
+                            params={{ token: order.viewToken }}
+                            className="text-sm underline underline-offset-4 hover:text-gold-deep"
+                          >
+                            Shiko detajet
+                          </Link>
+                        ) : (
+                          <span className="text-xs text-ink-soft">—</span>
+                        )}
                       </td>
                     </tr>
                   ))}

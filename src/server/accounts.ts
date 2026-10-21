@@ -460,6 +460,8 @@ export const setDefaultAddress = createServerFn({ method: "POST" })
 export type MyOrder = {
   id: string;
   orderNumber: string;
+  /** Unguessable token for this order's confirmation page (/porosia/<token>). */
+  viewToken: string | null;
   status: string;
   statusLabel: string;
   total: string;
@@ -482,7 +484,7 @@ export const listMyOrders = createServerFn({ method: "GET" }).handler(
     guarded(async () => {
       const user = await requireUser();
       const rows = (await sql()`
-        select o.id, o.order_number, o.status, o.total, o.created_at,
+        select o.id, o.order_number, o.view_token, o.status, o.total, o.created_at,
                (select count(*)::int from order_items i where i.order_id = o.id) as item_count
         from orders o
         where o.profile_id = ${user.id}
@@ -491,6 +493,7 @@ export const listMyOrders = createServerFn({ method: "GET" }).handler(
       `) as {
         id: string;
         order_number: string;
+        view_token: string | null;
         status: string;
         total: string;
         created_at: string;
@@ -501,6 +504,7 @@ export const listMyOrders = createServerFn({ method: "GET" }).handler(
         data: rows.map((r) => ({
           id: r.id,
           orderNumber: r.order_number,
+          viewToken: r.view_token ?? null,
           status: r.status,
           statusLabel: ORDER_STATUS_LABEL[r.status] ?? r.status,
           total: String(r.total),

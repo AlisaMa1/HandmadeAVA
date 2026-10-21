@@ -9,7 +9,10 @@ export type CartLine = {
   price: number;
   imageUrl: string | null;
   quantity: number;
+  /** Human label of the chosen variant (shown in the cart). */
   variant?: string | null;
+  /** Id of the chosen variant — the only variant information checkout may send. */
+  variantId?: string | null;
   stock: number;
 };
 
@@ -72,7 +75,7 @@ export function parseCart(json: string): CartLine[] {
 
 export function addToCart(line: CartLine) {
   ensure();
-  const key = (l: CartLine) => l.productId + "|" + (l.variant ?? "");
+  const key = (l: CartLine) => l.productId + "|" + (l.variantId ?? l.variant ?? "");
   const existing = lines.find((l) => key(l) === key(line));
   if (existing) {
     const max = existing.stock > 0 ? existing.stock : 99;
@@ -82,15 +85,30 @@ export function addToCart(line: CartLine) {
   }
 }
 
-export function setQuantity(productId: string, variant: string | null | undefined, quantity: number) {
+export function setQuantity(
+  productId: string,
+  variant: string | null | undefined,
+  quantity: number,
+  variantId?: string | null
+) {
   ensure();
-  if (quantity <= 0) return removeLine(productId, variant);
-  write(lines.map((l) => (l.productId === productId && (l.variant ?? "") === (variant ?? "") ? { ...l, quantity } : l)));
+  if (quantity <= 0) return removeLine(productId, variant, variantId);
+  write(
+    lines.map((l) =>
+      l.productId === productId && (l.variantId ?? l.variant ?? "") === (variantId ?? variant ?? "")
+        ? { ...l, quantity }
+        : l
+    )
+  );
 }
 
-export function removeLine(productId: string, variant: string | null | undefined) {
+export function removeLine(productId: string, variant: string | null | undefined, variantId?: string | null) {
   ensure();
-  write(lines.filter((l) => !(l.productId === productId && (l.variant ?? "") === (variant ?? ""))));
+  write(
+    lines.filter(
+      (l) => !(l.productId === productId && (l.variantId ?? l.variant ?? "") === (variantId ?? variant ?? ""))
+    )
+  );
 }
 
 export function clearCart() {
@@ -99,6 +117,15 @@ export function clearCart() {
 
 export function cartCount(list: CartLine[]): number {
   return list.reduce((sum, l) => sum + l.quantity, 0);
+}
+
+/** The only cart data that ever reaches the server: ids and quantities. */
+export function checkoutItems(list: CartLine[]) {
+  return list.map((l) => ({
+    productId: l.productId,
+    variantId: l.variantId ?? null,
+    quantity: Math.max(1, Math.floor(l.quantity)),
+  }));
 }
 
 export function cartSubtotal(list: CartLine[]): number {
