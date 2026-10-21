@@ -2,7 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { useSyncExternalStore } from "react";
 import { getStoreSettings } from "~/server/catalog";
 import { EmptyState } from "~/components/ui";
-import { cartSnapshot, parseCart, removeLine, setQuantity, subscribeCart, cartSubtotal } from "~/lib/cart";
+import { cartCount, cartSnapshot, parseCart, removeLine, setQuantity, subscribeCart, cartSubtotal } from "~/lib/cart";
 import { formatEuro, toNumber } from "~/lib/format";
 
 export const Route = createFileRoute("/shporta")({
@@ -75,13 +75,13 @@ function CartPage() {
                       max={Math.max(1, line.stock)}
                       value={line.quantity}
                       onChange={(e) =>
-                        setQuantity(line.productId, line.variant, Math.max(1, Number(e.target.value) || 1))
+                        setQuantity(line.productId, line.variant, Math.max(1, Number(e.target.value) || 1), line.variantId)
                       }
                       className="input-soft w-20"
                     />
                     <button
                       type="button"
-                      onClick={() => removeLine(line.productId, line.variant)}
+                      onClick={() => removeLine(line.productId, line.variant, line.variantId)}
                       className="text-sm text-ink-soft underline underline-offset-4 hover:text-gold-deep"
                     >
                       Hiq
@@ -114,12 +114,19 @@ function CartPage() {
                 Shtoni edhe {formatEuro(threshold - subtotal)} për dërgesë falas.
               </p>
             ) : null}
-            <Link to="/dyqani" className="btn-gold mt-6 w-full">
+            <Link to="/arka" className="btn-gold mt-6 w-full">
+              Vazhdo në arkë
+            </Link>
+            <p className="mt-3 text-center text-xs text-ink-soft">{cartCount(lines)} copë në shportë</p>
+            <Link
+              to="/dyqani"
+              className="mt-3 block text-center text-sm text-ink-soft underline underline-offset-4 hover:text-gold-deep"
+            >
               Vazhdo blerjen
             </Link>
             <p className="mt-4 text-xs leading-relaxed text-ink-soft">
-              Pagesa bëhet në dorëzim. Hapi i porosisë vjen së shpejti — kontaktoni telefonin {settings.contact_phone}{" "}
-              për çdo pyetje.
+              Pagesa bëhet vetëm me para në dorë, kur pakoja të mbërrijë. Për çdo pyetje telefononi{" "}
+              {settings.contact_phone}.
             </p>
           </aside>
         </div>

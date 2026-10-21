@@ -160,6 +160,7 @@ function ProductPage() {
                   imageUrl: image?.url ?? null,
                   quantity,
                   variant: variant?.value ?? null,
+                  variantId: variant?.id ?? null,
                   stock: variant ? variant.stock : product.stock,
                 });
                 setAdded(true);
